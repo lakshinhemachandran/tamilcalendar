@@ -2,7 +2,7 @@ const translations = {
   ta: {
     title: "தமிழ் காலண்டர்",
     upcomingDatesTitle: "வரவிருக்கும் முக்கிய தேதிகள்",
-    footerText: "© 2025 தமிழ் காலண்டர். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    footerText: "© 2025 <a href='http://www.quantumdev.rf.gd' target='_blank'>QuantumDev</a>. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
     holidays: [
       { name: "பொங்கல் – அறுவடை திருவிழா", date: getPongalDate(new Date().getFullYear()) },
       { name: "புத்தாண்டு – தமிழ் புத்தாண்டு", date: getPuthanduDate(new Date().getFullYear()) },
@@ -11,14 +11,13 @@ const translations = {
       { name: "திருவையாறு திருவிழா – தியாகராஜருக்கு அஞ்சலி", date: getThiruvaiyaruDate(new Date().getFullYear()) },
       { name: "கார்த்திகை தீபம் – விளக்குகளின் திருவிழா", date: getKarthigaiDeepamDate(new Date().getFullYear()) },
       { name: "மகாமகம் திருவிழா – தனித்துவமான பன்னிரண்டு ஆண்டுகள்", date: getMahamahamDate(new Date().getFullYear()) },
-      { name: "தீபாவளி", date: getDiwaliDate(new Date().getFullYear()) },
-      { name: "புத்தாண்டு", date: getPuthanduDate(new Date().getFullYear()) }
+      { name: "தீபாவளி", date: getDiwaliDate(new Date().getFullYear()) }
     ]
   },
   en: {
     title: "Tamil Calendar",
     upcomingDatesTitle: "Upcoming Important Dates",
-    footerText: "© 2025 Tamil Calendar. All rights reserved.",
+    footerText: "© 2025 <a href='http://www.quantumdev.rf.gd' target='_blank'>QuantumDev</a>. All rights reserved.",
     holidays: [
       { name: "Pongal – The Harvest Festival", date: getPongalDate(new Date().getFullYear()) },
       { name: "Puthandu – Tamil New Year's Day", date: getPuthanduDate(new Date().getFullYear()) },
@@ -27,8 +26,7 @@ const translations = {
       { name: "Thiruvaiyaru Festival – A Tribute to Thyagaraja", date: getThiruvaiyaruDate(new Date().getFullYear()) },
       { name: "Karthigai Deepam – The Festival of Lights", date: getKarthigaiDeepamDate(new Date().getFullYear()) },
       { name: "Mahamaham Festival – A Unique Duodecennial Festival", date: getMahamahamDate(new Date().getFullYear()) },
-      { name: "Diwali", date: getDiwaliDate(new Date().getFullYear()) },
-      { name: "Tamil New Year", date: getPuthanduDate(new Date().getFullYear()) }
+      { name: "Diwali", date: getDiwaliDate(new Date().getFullYear()) }
     ]
   }
 };
@@ -40,7 +38,7 @@ function changeLanguage() {
 
   document.getElementById('title').innerText = translation.title;
   document.getElementById('upcoming-dates-title').innerText = translation.upcomingDatesTitle;
-  document.getElementById('footer-text').innerText = translation.footerText;
+  document.getElementById('footer-text').innerHTML = translation.footerText;
   calendarIframe.src = language === 'ta' ? "https://www.tamildailycalendar.com/tamil_daily_calendar.php" : "https://www.tamildailycalendar.com/english_daily_calendar.php";
 
   displayUpcomingHolidays(language);
@@ -89,11 +87,17 @@ function getUpcomingHolidays(holidays) {
 
 function createCountdownButton(holiday) {
   const button = document.createElement("button");
-  const now = new Date();
-  const timeDiff = holiday.date - now;
-  const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-  button.innerHTML = `<b>${holiday.name}</b> - ${daysLeft} days left`;
+  button.innerHTML = `<b>${holiday.name}</b> - <span class="days-left">${getDaysLeft(holiday.date)}</span> days left`;
+  button.onclick = () => {
+    window.location.href = `countdown.html?name=${encodeURIComponent(holiday.name)}&date=${holiday.date.toISOString()}`;
+  };
   return button;
+}
+
+function getDaysLeft(date) {
+  const now = new Date();
+  const timeDiff = date - now;
+  return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 }
 
 function displayUpcomingHolidays(language) {

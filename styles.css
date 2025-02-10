@@ -1,0 +1,93 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0047ab;
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1.6;
+  animation: fadeIn 2s ease-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  animation: slideUp 1s ease-out;
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.language-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar {
+  margin-bottom: 40px;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.countdown {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-out;
+}
+
+.countdown-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  animation: fadeIn 3s ease-out;
+}
+
+.countdown-buttons button {
+  background-color: #0047ab;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+countdown-buttons button:hover {
+  background-color: #00377d;
+  transform: scale(1.05);
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #777;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/gallery_gen/quantum-dev-favicon.png">
+  <title>Tamil Countdown Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id="title">தமிழ் காலண்டர்</h1>
+      <div class="language-select">
+        <label for="language">Select Language: </label>
+        <select id="language" onchange="changeLanguage()">
+          <option value="ta">Tamil</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </header>
+    <div class="calendar">
+      <iframe id="calendar-iframe" src="https://www.tamildailycalendar.com/tamil_daily_calendar.php" width="100%" height="500px" frameborder="0"></iframe>
+    </div>
+    <div class="countdown">
+      <h2 id="upcoming-dates-title">வரவிருக்கும் முக்கிய தேதிகள்</h2>
+      <div class="countdown-buttons">
+        <!-- Buttons for upcoming dates will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <footer>
+      <p id="footer-text">© 2025 தமிழ் காலண்டர். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

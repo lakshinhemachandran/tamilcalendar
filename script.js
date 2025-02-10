@@ -33,13 +33,18 @@ const translations = {
 
 function changeLanguage() {
   const language = document.getElementById('language').value;
+  localStorage.setItem('language', language);
+  updateLanguage(language);
+}
+
+function updateLanguage(language) {
   const calendarIframe = document.getElementById('calendar-iframe');
   const translation = translations[language];
 
   document.getElementById('title').innerText = translation.title;
   document.getElementById('upcoming-dates-title').innerText = translation.upcomingDatesTitle;
   document.getElementById('footer-text').innerHTML = translation.footerText;
-  calendarIframe.src = language === 'ta' ? "https://www.tamildailycalendar.com/tamil_daily_calendar.php" : "https://www.tamildailycalendar.com/english_daily_calendar.php";
+  calendarIframe.src = language === 'ta' ? "https://www.tamildailycalendar.com/tamil_daily_calendar.php?embed=true" : "https://www.tamildailycalendar.com/english_daily_calendar.php?embed=true";
 
   displayUpcomingHolidays(language);
 }
@@ -112,5 +117,7 @@ function displayUpcomingHolidays(language) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  displayUpcomingHolidays('ta');
+  const language = localStorage.getItem('language') || 'ta';
+  document.getElementById('language').value = language;
+  updateLanguage(language);
 });

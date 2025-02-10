@@ -1,26 +1,29 @@
-<!DOCTYPE html>
-<html lang="ta">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countdown</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1 id="event-name"></h1>
-    </header>
-    <div class="countdown-timer" id="countdown-timer">
-      <!-- Countdown timer will be inserted here by JavaScript -->
-    </div>
-    <div class="back-link">
-      <a href="https://lakshinhemachandran.github.io/tamilcalendar">Back to Website</a>
-    </div>
-    <footer>
-      <p>© 2025 <a href="http://www.quantumdev.rf.gd" target="_blank">QuantumDev</a>. All rights reserved.</p>
-    </footer>
-  </div>
-  <script src="countdown.js"></script>
-</body>
-</html>
+function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+
+function updateCountdown() {
+  const eventName = getQueryParam('name');
+  const eventDate = new Date(getQueryParam('date'));
+  const now = new Date();
+
+  const timeDiff = eventDate - now;
+  const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+  document.getElementById('event-name').innerText = eventName;
+  document.getElementById('countdown-timer').innerHTML = `
+    <div><span class="count">${days}</span> Days</div>
+    <div><span class="count">${hours}</span> Hours</div>
+    <div><span class="count">${minutes}</span> Minutes</div>
+    <div><span class="count">${seconds}</span> Seconds</div>
+  `;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+});

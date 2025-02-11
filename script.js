@@ -10,7 +10,7 @@ const translations = {
       { name: "தைப்பூசம் – திருவள்ளுவர் பிறந்தநாள்", date: getThaipusamDate(new Date().getFullYear()) },
       { name: "திருவையாறு திருவிழா – தியாகராஜருக்கு அஞ்சலி", date: getThiruvaiyaruDate(new Date().getFullYear()) },
       { name: "கார்த்திகை தீபம் – விளக்குகளின் திருவிழா", date: getKarthigaiDeepamDate(new Date().getFullYear()) },
-      { name: "மகாமகம் திருவிழா – தனித்துவமான பன்னிரண்டு ஆண்டுகள்", date: getMahamahamDate(new Date().getFullYear()) },
+      { name: "மகாமகம் திருவிழா – தனித்துவமான பன்னிரண்டு ஆண்டுகள்", date: getMahamahamDate(new Date().getFullYear(), 2, 9) },
       { name: "தீபாவளி", date: getDiwaliDate(new Date().getFullYear()) }
     ]
   },
@@ -25,7 +25,7 @@ const translations = {
       { name: "Thaipusam – The Birthday of Lord Subramaniam", date: getThaipusamDate(new Date().getFullYear()) },
       { name: "Thiruvaiyaru Festival – A Tribute to Thyagaraja", date: getThiruvaiyaruDate(new Date().getFullYear()) },
       { name: "Karthigai Deepam – The Festival of Lights", date: getKarthigaiDeepamDate(new Date().getFullYear()) },
-      { name: "Mahamaham Festival – A Unique Duodecennial Festival", date: getMahamahamDate(new Date().getFullYear()) },
+      { name: "Mahamaham Festival – A Unique Duodecennial Festival", date: getMahamahamDate(new Date().getFullYear(), 2, 9) },
       { name: "Diwali", date: getDiwaliDate(new Date().getFullYear()) }
     ]
   }
@@ -38,13 +38,11 @@ function changeLanguage() {
 }
 
 function updateLanguage(language) {
-  const calendarIframe = document.getElementById('calendar-iframe');
   const translation = translations[language];
 
   document.getElementById('title').innerText = translation.title;
   document.getElementById('upcoming-dates-title').innerText = translation.upcomingDatesTitle;
   document.getElementById('footer-text').innerHTML = translation.footerText;
-  calendarIframe.src = language === 'ta' ? "https://www.tamildailycalendar.com/tamil_daily_calendar.php?embed=true" : "https://www.tamildailycalendar.com/english_daily_calendar.php?embed=true";
 
   displayUpcomingHolidays(language);
 }
@@ -73,12 +71,8 @@ function getKarthigaiDeepamDate(year) {
   return new Date(year, 10, 24); // November 24
 }
 
-function getMahamahamDate(year) {
-  if (year === 2028) {
-    return new Date(2028, 1, 17); // February 17, 2028
-  } else {
-    return null;
-  }
+function getMahamahamDate(year, month, day) {
+  return new Date(year, month, day); // March 9, 2028
 }
 
 function getDiwaliDate(year) {
